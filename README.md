@@ -69,6 +69,6 @@ sudo apt install nodejs
 sudo apt install npm
 ```
 
-## Collaborators
-
-
+## Contributors
+[![Aditya Pradhan](https://avatars.githubusercontent.com/u/43316854?size=60)](https://github.com/AdityaPradhan1)
+<!-- Arihant Image -->
