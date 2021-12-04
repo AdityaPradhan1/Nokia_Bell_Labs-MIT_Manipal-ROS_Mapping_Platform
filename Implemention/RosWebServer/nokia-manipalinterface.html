@@ -1,0 +1,190 @@
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	 crossorigin="anonymous">
+	<script type="text/javascript" src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js">
+
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/vue">
+
+	</script>
+
+  <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.7.3/nipplejs.js"></script>
+  <script type="text/javascript" type="text/javascript">
+    var ros = new ROSLIB.Ros({
+      url: 'ws://10.87.0.44:9090'
+    });
+
+    ros.on('connection', function () {
+      document.getElementById("status").innerHTML = "Connected";
+    });
+
+    ros.on('error', function (error) {
+      document.getElementById("status").innerHTML = "Error";
+    });
+
+    ros.on('close', function () {
+      document.getElementById("status").innerHTML = "Closed";
+    });
+
+    var txt_listener = new ROSLIB.Topic({
+      ros: ros,
+      name: '/txt_msg',
+      messageType: 'std_msgs/String'
+    });
+
+    txt_listener.subscribe(function (m) {
+      document.getElementById("msg").innerHTML = m.data;
+      console.log(m);
+      move(1, 0);
+    });
+
+    cmd_vel_listener = new ROSLIB.Topic({
+      ros: ros,
+      name: "/cmd_vel",
+      messageType: 'geometry_msgs/Twist'
+    });
+    cmd_vel_listener.subscribe(function (m) {
+      document.getElementById("msglx").innerHTML = m.linear.x;
+      document.getElementById("msgly").innerHTML = m.linear.y;
+      document.getElementById("msglz").innerHTML = m.linear.z;
+      document.getElementById("msgax").innerHTML = m.angular.x;
+      document.getElementById("msgay").innerHTML = m.angular.y;
+      document.getElementById("msgaz").innerHTML = m.angular.z;
+      console.log(m);
+      move(1, 0);
+    });
+    move = function (linear, angular) {
+      var twist = new ROSLIB.Message({
+        linear: {
+          x: 0.1,
+          y: 0,
+          z: 0
+        },
+        angular: {
+          x: 0,
+          y: 0,
+          z: angular
+        }
+      });
+      cmd_vel_listener.publish(twist);
+    }
+
+    createJoystick = function () {
+      var options = {
+        zone: document.getElementById('zone_joystick'),
+        threshold: 0.1,
+        position: { left: 50 + '%' },
+        mode: 'static',
+        size: 150,
+        color: '#000000',
+      };
+      manager = nipplejs.create(options);
+
+      linear_speed = 0;
+      angular_speed = 0;
+
+      manager.on('start', function (event, nipple) {
+        timer = setInterval(function () {
+          move(linear_speed, angular_speed);
+        }, 25);
+      });
+
+      manager.on('move', function (event, nipple) {
+        max_linear = 1.0; // m/s
+        max_angular = 2.0; // rad/s
+        max_distance = 5.0; // pixels;
+        linear_speed = Math.sin(nipple.angle.radian) * max_linear * nipple.distance/max_distance;
+				angular_speed = -Math.cos(nipple.angle.radian) * max_angular * nipple.distance/max_distance;
+      });
+
+      manager.on('end', function () {
+        if (timer) {
+          clearInterval(timer);
+        }
+        self.move(0, 0);
+      });
+    }
+    window.onload = function () {
+      createJoystick();
+    }
+    
+    
+  </script>
+</head>
+
+<body style="background-color: gainsboro;">
+	<div id="app" class="container">
+		<!-- <div class="jumbotron"> -->
+			<center><h1 style="color: blue; margin-top: 50px;"><B>Nokia_Manipal ROS Interface</B></h1></center>
+		<!-- </div> -->
+
+
+
+		<div class="row" style="max-height:200px;">
+			<div class="col-md-6">
+				<h3>Connection status</h3>
+				<p class="text-danger" v-if="!connected">Not connected!</p>
+				<p class="text-success" v-if="connected">Connected!</p>
+				<label>Websocket server address</label>
+                <input type="text" v-model="ws_address" />
+                <br><br>
+                <button :disabled="loading" class="btn btn-danger" @click="disconnect" v-if="connected">Disconnect!</button>
+                <button :disabled="loading" class="btn btn-success" @click="connect" v-else>Connect!</button>
+			</div>
+			<div class="col-md-6" style="max-height:200px; overflow:auto;">
+				<h3>Log messages</h3>
+                <div>
+                    <p v-for="log of logs">{{ log }}</p>
+                </div>
+			</div>
+		</div>
+
+        <hr>
+
+        <div class="row" style="margin-left:-200px; margin-top: 100px;">
+            <div class="col-md-12 text-center" style="margin-left: 100px;">
+              <h3>  Navigation Buttons and Joystick</h3> 
+            </div>
+
+            <!-- 1st row -->
+            <div class="col-md-12 text-center" style="margin-left: -14.25%; margin-top: 50px;" >
+                <button @click="forward" :disabled="loading || !connected" class="btn btn-primary" style="width: 130px; font-size: 20px;">Forward</button>
+                <br><br>
+            </div>
+
+            <!-- 2nd row -->
+            <div class=" text-center" style="margin-left: 20% ; " >
+                <button @click="turnLeft" :disabled="loading || !connected" class="btn btn-primary" style="width: 130px; font-size: 20px;">Left</button>
+            </div>
+            <div class=" text-center" style="margin-left: 1% ; ">
+                <button @click="stop" :disabled="loading || !connected" class="btn btn-danger" style="width: 130px; font-size: 20px;">Stop</button>
+                <br><br>
+            </div>
+            <div class=" text-center" style="margin-left: 1% ; ">
+                <button @click="turnRight" :disabled="loading || !connected" class="btn btn-primary" style="width: 130px; font-size: 20px;">Right</button>
+            </div>
+
+            <!-- 3rd row -->
+            <div class="col-md-12 text-center"  style="margin-left: -14.25%;">
+                <button @click="backward" :disabled="loading || !connected" class="btn btn-primary" style="width: 130px; font-size: 20px;">Backward</button>
+            </div>
+        </div>
+
+	</div>
+
+    
+    <div id="zone_joystick" style="position: relative; margin-top: -100px; margin-left: 500px;">
+        
+    </div>
+
+
+	<script type="text/javascript" src="main.js">
+
+	</script>
+   
+</body>
+
+</html>
