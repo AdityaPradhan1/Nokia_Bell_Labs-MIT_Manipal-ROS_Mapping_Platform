@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/CymaticLabs/Amqp/Scenes/AmqpDemo.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0

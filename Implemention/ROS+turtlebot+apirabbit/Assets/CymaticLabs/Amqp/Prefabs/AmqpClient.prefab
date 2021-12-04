@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1989313852604540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4826312059914762}
+  - component: {fileID: 114557552359535390}
+  m_Layer: 0
+  m_Name: AmqpClient
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4826312059914762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989313852604540}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114557552359535390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989313852604540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e264949df098d43a905c6bf2efaedb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Connection: localhost
+  ConnectOnStart: 0
+  RelaxedSslValidation: 1
+  WriteToConsole: 1
+  ExchangeSubscriptions: []
+  QueueSubscriptions: []
+  OnConnected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDisconnecting:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDisconnected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReconnecting:
+    m_PersistentCalls:
+      m_Calls: []
+  OnConnectionAborted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnConnectionError:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSubscribedToExchange:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnsubscribedFromExchange:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSubscribedToQueue:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnsubscribedFromQueue:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExchangeSubscribeError:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExchangeUnsubscribeError:
+    m_PersistentCalls:
+      m_Calls: []
+  OnQueueSubscribeError:
+    m_PersistentCalls:
+      m_Calls: []
+  OnQueueUnsubscribeError:
+    m_PersistentCalls:
+      m_Calls: []
