@@ -70,10 +70,10 @@ sudo apt install npm
 ```
 
 ## Contributors
-[![Aditya Pradhan]()](https://github.com/AdityaPradhan1), 
-[![Arihant Jha]()](https://github.com/arihaaant)
+[Aditya Pradhan](https://github.com/AdityaPradhan1), 
+[Arihant Jha](https://github.com/arihaaant)
 
 ### Mentors
-[![Manickam Elangovan]()](elangovan.manickam@nokia-bell-labs.com),
-[![Shilpa Puttegowda Pais]()](shilpa.puttegowda_pais@nokia.com),
-[![Poornalatha G]()](poornalatha.g@manipal.edu)
+[Manickam Elangovan](mailto:elangovan.manickam@nokia-bell-labs.com),
+[Shilpa Puttegowda Pais](mailto:shilpa.puttegowda_pais@nokia.com),
+[Poornalatha G](mailto:poornalatha.g@manipal.edu)
