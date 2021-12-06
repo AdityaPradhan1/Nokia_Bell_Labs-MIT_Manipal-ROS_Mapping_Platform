@@ -1,7 +1,7 @@
 # ROS_Mapping_Platform
 
 ## About the Project
-The project aims to build a middleware layer connecting ROS with non ROS robots. This project acts as a building block to utilize ROS algorithms and functionalities with robots that do not natively support ROS. The main aim of this project is providing support for exploration algorithms and autonomous mapping for non ROS robots and experimenting with different environments.
+The project aims to build a middleware layer connecting ROS with non-ROS robots. This project acts as a building block to utilize ROS algorithms and functionalities with robots that do not natively support ROS. The main aim of this project is to provide support for exploration algorithms and autonomous mapping for non-ROS robots and experiment with different environments.
 
 ### Project Structure
 - The final project folder contains the final code of the project along with the presentation, documentation file, videos, as well as steps how to setup, run the code, along with the code flow.
