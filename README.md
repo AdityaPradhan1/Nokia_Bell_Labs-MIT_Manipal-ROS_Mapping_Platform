@@ -4,14 +4,15 @@
 The project aims to build a middleware layer connecting ROS with non-ROS robots. This project acts as a building block to utilize ROS algorithms and functionalities with robots that do not natively support ROS. The main aim of this project is to provide support for exploration algorithms and autonomous mapping for non-ROS robots and experiment with different environments.
 
 ### Project Structure
-- The final project folder contains the final code of the project along with the presentation, documentation file, videos, as well as steps how to setup, run the code, along with the code flow.
-- The implementation folder includes the various approaches and all the projects from the beginning
-- The TODOList.txt contains the future tasks where this project can be extended and improved 
+- The Final Project folder contains the final code of the project along with the presentation, documentation file, videos, as well as steps how to setup, run the code, along with the code flow. 
+- The Implementation Folder includes the various approaches and all the intermediate projects from the beginning,
+- The TODOList.txt contains the future tasks where this project can be extended and improved.
 
 ## Installation
 
 ### 1. ROS
-The version of ROS used throughout the project was ROS Melodic on Ubuntu 18.04.5 LTS with the following script
+The version of ROS used in this project was ROS Melodic on Ubuntu 18.04.6 (https://releases.ubuntu.com/18.04/).  
+To install the ros environment and create workspace you can use the below script.
 ```shell
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
 sudo apt install curl # if you haven't already installed curl
@@ -49,7 +50,7 @@ sudo apt-get install ros-meodic-rosbridge-server
 ```
 
 ### 4. Gazebo
-Version 9 was used in the project
+Version 9 was used in this project
 ```shell
  curl -ssL http://get.gazebosim.org | sh
 ```
