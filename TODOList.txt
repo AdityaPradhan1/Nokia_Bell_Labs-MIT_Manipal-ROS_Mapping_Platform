@@ -1,9 +1,9 @@
 TODO List
 
-1) Expand on the project by adding more sensors apart from the exsisting ones.
+1) Expand on the project by adding more sensors apart from the existing ones.
 2) Try different slam algorithms including fleet management system.
-3) Try it on different non ros environments like unreal engine, etc.
-4) Add more features and subcribe and publish to different topics. 
-5) Make the webserver gui look more aesthetically pleasing.
-6) Extend it to different types of robots such as the omron robot.
-7) Make the code more modular, simpler, scalable, bug free and improve documentation.
+3) Try it on different non-ros environments like unreal engine, etc.
+4) Add more features and subscribe and publish to different topics. 
+5) Make the webserver GUI look more aesthetically pleasing.
+6) Extend it to different types of robots such as the Omron robot.
+7) Make the code more modular, simpler, scalable, bug-free and improve documentation.
