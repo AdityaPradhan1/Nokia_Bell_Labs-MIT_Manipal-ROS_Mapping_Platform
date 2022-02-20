@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="laser_enabled" default="$(optenv HUSKY_LMS1XX_ENABLED true)"/>
+    <arg name="realsense_enabled" default="false"/>
+    <arg name="move_forward_only" default="False"/>
+    <arg name="explorer" default="RRT"/>
+
+    <!-- Standalone launcher to visualize the robot model. -->
+    <include file="$(find husky_description)/launch/description.launch">
+        <arg name="laser_enabled" value="$(arg laser_enabled)"/>
+        <arg name="realsense_enabled" value="$(arg realsense_enabled)"/>
+    </include>
+
+    <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+    <!-- The launch file for launching the slam toolbox package with the required configuration-->
+    <include file="$(find mobile_robot_navigation_project)/launch/slam_toolbox.launch">
+    </include>
+
+    <!--- Run Move Base -->
+    <include file="$(find mobile_robot_navigation_project)/launch/move_base2.launch"/>
+
+    <!-- Autonomous Explorer Node -->
+    <!-- <include file="$(find ros_autonomous_slam)/launch/$(arg explorer).launch">
+    </include> -->
+
+    <!-- Run Frontier Exploration -->
+    <include file="$(find mobile_robot_navigation_project)/launch/exploration.launch" />
+
+    <!-- Starting rviz with a preset config -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find mobile_robot_navigation_project)/config/config.rviz" />
+
+</launch>

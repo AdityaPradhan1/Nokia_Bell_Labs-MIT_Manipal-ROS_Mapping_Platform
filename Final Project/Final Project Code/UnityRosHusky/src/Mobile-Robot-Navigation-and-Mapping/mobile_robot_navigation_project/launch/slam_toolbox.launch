@@ -1,0 +1,8 @@
+<launch>
+
+    <node pkg="slam_toolbox" type="sync_slam_toolbox_node" name="slam_toolbox" output="screen">
+      <rosparam command="load" file="$(find mobile_robot_navigation_project)/config/mapper_params_online_sync.yaml" />
+    </node>
+  
+  </launch>
+  

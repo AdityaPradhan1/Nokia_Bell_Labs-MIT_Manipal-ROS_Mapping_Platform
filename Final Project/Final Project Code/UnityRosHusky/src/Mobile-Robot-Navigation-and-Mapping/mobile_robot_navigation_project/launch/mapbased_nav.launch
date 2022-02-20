@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="laser_enabled" default="$(optenv HUSKY_LMS1XX_ENABLED true)"/>
+    <arg name="realsense_enabled" default="false"/>
+
+    <!-- Standalone launcher to visualize the robot model. -->
+    <include file="$(find husky_description)/launch/description.launch">
+        <arg name="laser_enabled" value="$(arg laser_enabled)"/>
+        <arg name="realsense_enabled" value="$(arg realsense_enabled)"/>
+    </include>
+
+    <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+    <!-- Run the map server -->
+    <arg name="map_file" default="$(find mobile_robot_navigation_project)/map/map.yaml"/>
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+    <!--- Run AMCL -->
+    <include file="$(find mobile_robot_navigation_project)/launch/amcl.launch" />
+
+    <!--- Run Move Base -->
+    <include file="$(find mobile_robot_navigation_project)/launch/move_base.launch" />
+
+    <!-- Starting rviz with a preset config -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find mobile_robot_navigation_project)/config/config.rviz" />
+
+</launch>
