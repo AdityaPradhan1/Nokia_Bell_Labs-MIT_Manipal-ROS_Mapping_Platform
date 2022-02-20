@@ -7,3 +7,4 @@ TODO List
 5) Make the webserver GUI look more aesthetically pleasing.
 6) Extend it to different types of robots such as the Omron robot.
 7) Make the code more modular, simpler, scalable, bug-free and improve documentation.
+8) Write a white paper publication on it
